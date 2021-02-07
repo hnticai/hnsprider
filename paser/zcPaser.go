@@ -43,8 +43,23 @@ func ZcAllPaserLottery(ctx *goreq.Response, hs *gospider.Spider) error {
 	if _, ok := result["value"]; !ok {
 		return errors.New("抓取信息不包含信息解析信息")
 	}
+	
+	        var urls string = fmt.Sprintf(GspriderZucaiUrl["bqc"], "21016") //
+		hs.SeedTask(goreq.Get(urls), map[string]interface{}{"name": "bqc"}, func(ctx *gospider.Context) {
+			ctx.AddItem(ctx.Resp.Text)
+		})
+	
+	        urls = fmt.Sprintf(GspriderZucaiUrl["sfc"], "21016") //
+		hs.SeedTask(goreq.Get(urls), map[string]interface{}{"name": "sfc"}, func(ctx *gospider.Context) {
+			ctx.AddItem(ctx.Resp.Text)
+		})
+	
+	        urls  = fmt.Sprintf(GspriderZucaiUrl["jqc"], "21016") //
+		hs.SeedTask(goreq.Get(urls), map[string]interface{}{"name": "jqc"}, func(ctx *gospider.Context) {
+			ctx.AddItem(ctx.Resp.Text)
+		})
 
-	var values map[string]gjson.Result = result["value"].Map()
+	//var values map[string]gjson.Result = result["value"].Map()
 
 	/*var bqclist []gjson.Result = values["bqclist"].Array()
 	for i := len(bqclist) - 1; i > 0; i-- {
@@ -56,7 +71,7 @@ func ZcAllPaserLottery(ctx *goreq.Response, hs *gospider.Spider) error {
 
 		time.Sleep(3 * time.Second)
 
-	}*/
+	}
 
 	var jqclist []gjson.Result = values["jqclist"].Array()
 	for i := len(jqclist) - 1; i > 0; i-- {
@@ -69,7 +84,7 @@ func ZcAllPaserLottery(ctx *goreq.Response, hs *gospider.Spider) error {
 		time.Sleep(3 * time.Second)
 	}
 
-	/*var sfclist []gjson.Result = values["sfclist"].Array()
+	var sfclist []gjson.Result = values["sfclist"].Array()
 	for i := len(sfclist) - 1; i > 0; i-- {
 		var issue string = sfclist[i].String()
 		var urls string = fmt.Sprintf(GspriderZucaiUrl["sfc"], issue) //
