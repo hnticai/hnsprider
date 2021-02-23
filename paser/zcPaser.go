@@ -44,17 +44,17 @@ func ZcAllPaserLottery(ctx *goreq.Response, hs *gospider.Spider) error {
 		return errors.New("抓取信息不包含信息解析信息")
 	}
 	
-	        var urls string = fmt.Sprintf(GspriderZucaiUrl["bqc"], "21016") //
+	        var urls string = fmt.Sprintf(GspriderZucaiUrl["bqc"], "21017") //
 		hs.SeedTask(goreq.Get(urls), map[string]interface{}{"name": "bqc"}, func(ctx *gospider.Context) {
 			ctx.AddItem(ctx.Resp.Text)
 		})
 	
-	        urls = fmt.Sprintf(GspriderZucaiUrl["sfc"], "21016") //
+	        urls = fmt.Sprintf(GspriderZucaiUrl["sfc"], "21017") //
 		hs.SeedTask(goreq.Get(urls), map[string]interface{}{"name": "sfc"}, func(ctx *gospider.Context) {
 			ctx.AddItem(ctx.Resp.Text)
 		})
 	
-	        urls  = fmt.Sprintf(GspriderZucaiUrl["jqc"], "21016") //
+	        urls  = fmt.Sprintf(GspriderZucaiUrl["jqc"], "21017") //
 		hs.SeedTask(goreq.Get(urls), map[string]interface{}{"name": "jqc"}, func(ctx *gospider.Context) {
 			ctx.AddItem(ctx.Resp.Text)
 		})
